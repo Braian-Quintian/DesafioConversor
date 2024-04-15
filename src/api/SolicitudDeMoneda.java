@@ -2,7 +2,7 @@ package api;
 
 import com.google.gson.Gson;
 import modulos.CodigosMoneda;
-import modulos.SupportedCodesResponse;
+import modulos.CodigosSoportadosRespuesta;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -21,8 +21,8 @@ public class SolicitudDeMoneda {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             String json = response.body();
             Gson gson = new Gson();
-            SupportedCodesResponse supportedCodesResponse = gson.fromJson(json, SupportedCodesResponse.class);
-            for (List<String> code : supportedCodesResponse.getSupportedCodes()) {
+            CodigosSoportadosRespuesta codigosSoportadosRespuesta = gson.fromJson(json, CodigosSoportadosRespuesta.class);
+            for (List<String> code : codigosSoportadosRespuesta.getSupportedCodes()) {
                 codigosList.add(new CodigosMoneda(code.get(0), code.get(1)));
             }
         } catch (Exception e) {
